@@ -44,12 +44,12 @@ public class CatalogItemController {
   }
 
   @PutMapping
-  public ResponseEntity<CatalogItem> update(CatalogItem catalogItem) {
+  public ResponseEntity<CatalogItem> update(@RequestBody  CatalogItem catalogItem) {
     return ResponseEntity.ok(catalogItemService.update(catalogItem));
   }
 
-  @DeleteMapping
-  public ResponseEntity<CatalogItem> delete(Long id) {
+  @DeleteMapping("/{id}")
+  public ResponseEntity<CatalogItem> delete(@PathVariable("id") Long id) {
     return ResponseEntity.ok(catalogItemService.delete(id));
   }
 
@@ -64,12 +64,12 @@ public class CatalogItemController {
   }
 
   @GetMapping("/searchByCategoriesAnd")
-  public ResponseEntity<List<CatalogItem>> searchByCategoriesAnd(@RequestParam List<String> categories) {
+  public ResponseEntity<List<CatalogItem>> searchByCategoriesAnd(@RequestBody List<String> categories) {
     return ResponseEntity.ok(catalogItemService.findByCategoriesAnd(categories));
   }
 
   @GetMapping("/searchByCategoriesOr")
-  public ResponseEntity<List<CatalogItem>> searchByCategoriesOr(@RequestParam List<String> categories) {
+  public ResponseEntity<List<CatalogItem>> searchByCategoriesOr(@RequestBody List<String> categories) {
     return ResponseEntity.ok(catalogItemService.findByCategoriesOr(categories));
   }
 }

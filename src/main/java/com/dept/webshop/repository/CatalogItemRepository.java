@@ -15,14 +15,22 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CatalogItemRepository {
 
-  private List<CatalogItem> catalogItems = new ArrayList<>();
-  private static long counter = 1L;
+  private        List<CatalogItem> catalogItems = new ArrayList<>();
+  private static long              counter      = 1L;
 
   public CatalogItem save(CatalogItem item) {
     if (item.getId() == null) {
       item.setId(counter++);
+      catalogItems.add(item);
+    } else {
+      for (int i = 0, catalogItemsSize = catalogItems.size(); i < catalogItemsSize; i++) {
+        CatalogItem catalogItem = catalogItems.get(i);
+        if (catalogItem.getId().equals(item.getId())) {
+          catalogItems.set(i, item);
+          break;
+        }
+      }
     }
-    catalogItems.add(item);
     return item;
   }
 
@@ -60,7 +68,7 @@ public class CatalogItemRepository {
   public List<CatalogItem> findByCategoriesOr(List<Categories> categories) {
     return catalogItems
             .stream()
-            .filter(item ->  item.getCategories() != null  && !Collections.disjoint(item.getCategories(), categories))
+            .filter(item -> item.getCategories() != null && !Collections.disjoint(item.getCategories(), categories))
             .collect(Collectors.toList());
   }
 
