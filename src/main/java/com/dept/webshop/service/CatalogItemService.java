@@ -8,13 +8,13 @@ public interface CatalogItemService {
 
   List<CatalogItem> findAll();
 
-  CatalogItem getById(int id);
+  CatalogItem getById(Long id);
 
   CatalogItem create(CatalogItemDto catalogItemDto);
 
   CatalogItem update(CatalogItem catalogItem);
 
-  CatalogItem delete(int id);
+  CatalogItem delete(Long id);
 
   List<CatalogItem> findByCategory(String categoryQuery);
 

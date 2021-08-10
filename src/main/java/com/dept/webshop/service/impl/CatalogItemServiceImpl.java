@@ -32,9 +32,9 @@ public class CatalogItemServiceImpl implements CatalogItemService {
   }
 
   @Override
-  public CatalogItem getById(int id) {
+  public CatalogItem getById(Long id) {
     LOGGER.info("Getting Catalog item with id = " + id);
-    return catalogItemRepository.getById((long) id);
+    return catalogItemRepository.getById(id);
   }
 
   @Override
@@ -51,9 +51,9 @@ public class CatalogItemServiceImpl implements CatalogItemService {
   }
 
   @Override
-  public CatalogItem delete(int id) {
+  public CatalogItem delete(Long id) {
     LOGGER.info("Deleting Catalog item with id = " + id);
-    return catalogItemRepository.delete((long) id);
+    return catalogItemRepository.delete(id);
   }
 
   @Override

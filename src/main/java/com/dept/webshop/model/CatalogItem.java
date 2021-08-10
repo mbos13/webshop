@@ -73,6 +73,10 @@ public class CatalogItem {
   }
 
   public void setImages(List<URI> images) {
+    if(images == null) {
+      this.images = null;
+      return;
+    }
     this.images = new ArrayList<>(images);
   }
 
@@ -81,6 +85,10 @@ public class CatalogItem {
   }
 
   public void setCategories(List<Categories> categories) {
+    if(categories == null) {
+      this.categories = null;
+      return;
+    }
     this.categories = new ArrayList<>(categories);
   }
 

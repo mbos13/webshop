@@ -6,16 +6,17 @@ import com.dept.webshop.web.dto.CatalogItemDto;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 @RequestMapping("/webshop")
 public class CatalogItemController {
 
@@ -32,8 +33,13 @@ public class CatalogItemController {
     return ResponseEntity.ok(catalogItems);
   }
 
+  @GetMapping("/{id}")
+  public ResponseEntity<CatalogItem> getById(@PathVariable Long id) {
+    return ResponseEntity.ok(catalogItemService.getById(id));
+  }
+
   @PostMapping
-  public ResponseEntity<CatalogItem> create(CatalogItemDto catalogItemDto) {
+  public ResponseEntity<CatalogItem> create(@RequestBody CatalogItemDto catalogItemDto) {
     return ResponseEntity.ok(catalogItemService.create(catalogItemDto));
   }
 
@@ -43,7 +49,7 @@ public class CatalogItemController {
   }
 
   @DeleteMapping
-  public ResponseEntity<CatalogItem> delete(int id) {
+  public ResponseEntity<CatalogItem> delete(Long id) {
     return ResponseEntity.ok(catalogItemService.delete(id));
   }
 
